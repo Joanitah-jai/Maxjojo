@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ view.action|default:"Medical Equipment Form" }}</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header */
+        .header {
+            background-color: #007700; /* LimeGreen */
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            background-color: rgb(2, 31, 2); /* MediumSeaGreen */
+            padding: 10px;
+            justify-content: space-around;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #2E8B57; /* SeaGreen */
+        }
+
+        /* Form Container */
+        .container {
+            width: 50%;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: rgb(2, 31, 2); /* Brighter Green */
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            background-color: #007700; /* Gray */
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        Medical Equipment Management
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="{% url 'calibration:home' %}">Home</a>
+        <a href="{% url 'calibration:medicalequipment_list' %}">View Equipment</a>
+        <a href="{% url 'calibration:medicalequipment_create' %}">Add New Equipment</a>
+    </div>
+
+    <!-- Form Container -->
+    <div class="container">
+        <h1>{{ view.action|default:"Medical Equipment Form" }}</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Equipment</button>
+        </form>
+
+        <a href="{% url 'calibration:medicalequipment_list' %}" class="back-button">← Back to List</a>
+    </div>
+
+</body>
+</html>

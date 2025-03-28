@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>B12 Website</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: white;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background: #001400; /* Darker Green */
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+        .signup-box {
+            background: #00cc00; /* Brighter Green */
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .signup-box a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px; /* Reduced spacing */
+            text-decoration: none;
+            background: white;
+            color: white;
+        }
+        .nav-links {
+            display: flex;
+            gap: 60px; /* Reduced gap */
+            font-size: 16px;
+            text-decoration: none;
+            color: black;
+        }
+        .contact-box {
+            border: 2px solid #001400; /* Same as header */
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .content {
+            display: flex;
+            align-items: center;
+            margin: 20px;
+        }
+        .content img {
+            width: 500px;
+            height: auto;
+            margin-right: 20px;
+            margin-top: 100px;
+        }
+        .content-text {
+            color: #00cc00; /* Light Green */
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .data-box {
+            border: 2px solid #001400;
+            padding: 50px;
+            border-radius: 5px;
+            background: #f0f0f0;
+            width: 400px;
+            margin-left: 200px;
+            margin-top: 100px;
+        }
+        .appointment-link a {
+            color: #007700;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .nav-links a {
+            color: black;
+            text-decoration: none; /* Removed underline */
+        }
+        .footer {
+            background: #001400;
+            color: white;
+            padding: 100px;
+            text-align: center;
+            position: absolute;
+            
+            width: 100%;
+        }
+        .footer-bar {
+            background: #36e336;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            size: 200px;
+            margin-top: 300px;
+            text-align: center;
+        }
+        .get-in-touch {
+            background: black;
+            color: white;
+            padding: 5px 10px;
+            display: inline-block;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>
+        <div>Calibration management system. Monitor and manage the calibration of your medical equipment today.</div>
+        <div class="signup-box">
+            <a href="#">Sign Up</a>
+        </div>
+    </header>
+    <nav>
+        <div class="bold"><p>CARE</p></div>
+        <div class="nav-links">
+            <a href="{% url 'calibration:home' %}">Home</a>
+            <a href="{% url 'calibration:home' %}">About</a>
+            <a href="{% url 'calibration:home' %}">Services</a>
+            <a href="{% url 'calibration:home' %}" class="contact-box">Contact</a>
+        </div>
+    </nav>
+    <div class="content">
+        <img src="{% static 'p2.jpeg' %}" alt="Data Storage">
+        <div class="data-box">
+            <div class="content-text">DATA STORAGE</div>
+            <p>
+                Our data storage solution ensures that all calibration data for your medical equipment is securely stored and readily accessible whenever you need it. With a user-friendly interface, you can effortlessly manage your records, ensuring compliance with industry standards. This centralized system not only enhances data integrity but also facilitates quick retrieval during audits or inspections. From initial calibration to routine checks, every detail is meticulously recorded, giving you peace of mind. Trust Calibra Tech to safeguard your crucial information and streamline your calibration management process effectively.
+            </p>
+            <p style="color: #001400; font-weight: bold; ">Tap the link below to Enter Data into the systen</p>
+            <div class="appointment-link"><a href="{% url 'calibration:medicalequipment_list' %}">Enter Data</a></div>
+        </div>
+    </div>
+    <div class="footer-bar" style="text-align: center;">
+        Let's talk<br>
+        We would love to hear from you!<br>
+        <span class="get-in-touch">Get in touch</span>
+    </div>
+    <div class="footer">
+        Monitor Your Data<br>
+        <br>
+        <br> 
+        System by JOJO
+    </div>
+</body>
+</html>

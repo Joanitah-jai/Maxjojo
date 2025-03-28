@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  {% load static %}
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: url("{% static 'p5.jpeg' %}") no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+    }
+    .header-bar {
+      width: 100%;
+      background: darkgreen;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .navbar {
+      width: 100%;
+      background: white;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .navbar a {
+      color: black;
+      text-decoration: none;
+      padding: 14px 20px;
+      font-size: 18px;
+    }
+    .navbar a:hover {
+      background-color: lightgray;
+      border-radius: 5px;
+    }
+    /* Container for Registration Form */
+    .container {
+      width: 100%;
+      max-width: 450px;
+      padding: 1.5rem;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      margin-top: 80px;
+      animation: fadeIn 0.8s ease-in-out;
+      z-index: 2;
+      position: relative;
+    }
+    /* Title */
+    h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+      color: #4a90e2;
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
+    /* Form Styles */
+    form {
+      width: 100%;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: border-color 0.3s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 4px rgba(74, 144, 226, 0.5);
+    }
+    .text-danger {
+      color: red;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+    /* Submit Button - Pink Gradient */
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #ff1493, #ff69b4);
+    }
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .form-group input,
+      .form-group select {
+        padding: 8px;
+        font-size: 0.85rem;
+      }
+    }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hidden {
+      display: none;
+    }
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    /* Animated Side Box (Left Only) with p5.jpeg as Background */
+    .side-box {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      width: 350px;        /* Increased width */
+      min-height: 300px;    /* Increased height */
+      padding: 1rem;
+      background: url("{% static 'p6.jpeg' %}") no-repeat center center;
+      background-size: cover;
+      color: #fff;
+      border: none;       /* No border */
+      border-radius: 0;   /* Shapeless (no rounded corners) */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      opacity: 0;
+      animation: slideInLeft 1.5s forwards;
+    }
+    @keyframes slideInLeft {
+      0% { transform: translateX(-100%) translateY(-50%); opacity: 0; }
+      100% { transform: translateX(0) translateY(-50%); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header-bar">Calibration Management System</div>
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">Login</a>
+  </div>
+  
+  <div class="container">
+    <h2 style="color: black;">Register</h2>
+    <form method="post" id="registerForm">
+      {% csrf_token %}
+      <!-- Email -->
+      <div class="form-group">
+        <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email"
+               value="{{ form.email.value|default_if_none:'' }}">
+        <span class="text-danger">{{ form.email.errors }}</span>
+      </div>
+      <!-- Username -->
+      <div class="form-group">
+        <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username"
+               value="{{ form.username.value|default_if_none:'' }}">
+        <span class="text-danger">{{ form.username.errors }}</span>
+      </div>
+      <!-- First Name -->
+      <div class="form-group">
+        <input type="text" name="first_name" id="first_name" class="form-control" placeholder="Enter your first name"
+               value="{{ form.first_name.value|default_if_none:'' }}">
+        <span class="text-danger">{{ form.first_name.errors }}</span>
+      </div>
+      <!-- Last Name -->
+      <div class="form-group">
+        <input type="text" name="last_name" id="last_name" class="form-control" placeholder="Enter your last name"
+               value="{{ form.last_name.value|default_if_none:'' }}">
+        <span class="text-danger">{{ form.last_name.errors }}</span>
+      </div>
+      <!-- Role -->
+      <div class="form-group">
+        <select name="role" id="role" class="form-control">
+          <option value="" disabled selected>Select your role</option>
+          <option value="admin">Admin</option>
+          <option value="engineer">Engineer</option>
+          <option value="technician">Technician</option>
+          <option value="manager">Manager</option>
+          <option value="nurse">Nurse</option>
+          <option value="doctor">Doctor</option>
+          <option value="logistics">Logistics Staff</option>
+          <option value="auditor">Auditor</option>
+          <option value="trainee">Trainee</option>
+          <option value="external">External Contractor</option>
+        </select>
+        <span class="text-danger">{{ form.role.errors }}</span>
+      </div>
+      <!-- Validation Code (Hidden by default) -->
+      <div class="form-group hidden" id="validationCodeGroup">
+        <input type="number" name="validationCode" id="validationCode" class="form-control" placeholder="Enter Validation Code">
+        <span class="error-message" id="validationCodeError"></span>
+      </div>
+      <!-- Department -->
+      <div class="form-group">
+        <input type="text" name="department" id="department" class="form-control" placeholder="Enter your department"
+               value="{{ form.department.value|default_if_none:'' }}">
+        <span class="text-danger">{{ form.department.errors }}</span>
+      </div>
+      <!-- Phone Number -->
+      <div class="form-group">
+        <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter your phone number"
+               value="{{ form.phone_number.value|default_if_none:'' }}">
+        <span class="text-danger">{{ form.phone_number.errors }}</span>
+      </div>
+      <!-- Password -->
+      <div class="form-group">
+        <input type="password" name="password1" id="password1" class="form-control" placeholder="Enter your password">
+        <span class="text-danger">{{ form.password1.errors }}</span>
+      </div>
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <input type="password" name="password2" id="password2" class="form-control" placeholder="Confirm your password">
+        <span class="text-danger">{{ form.password2.errors }}</span>
+      </div>
+      <!-- Submit Button -->
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Register</button>
+      </div>
+      <p>Please Register if you do not have an account? OR <a href="{% url 'calibration:login' %}">Login</a> if you already have an account</p>
+    </form>
+  </div>
+  
+  <!-- Animated Side Box for CMS Info (Left Only) -->
+  <div class="side-box">
+    <h3 style="color: green;">About CMS</h3>
+    <p style="color: green;">Our Calibration Management System streamlines calibration, ensuring timely maintenance and accurate results.</p>
+  </div>
+  
+  <script>
+    const roleSelect = document.getElementById('role');
+    const validationCodeGroup = document.getElementById('validationCodeGroup');
+    const validationCodeInput = document.getElementById('validationCode');
+    const validationCodeError = document.getElementById('validationCodeError');
+    const registerForm = document.getElementById('registerForm');
+
+    // Role-specific codes
+    const roleCodes = {
+      admin: '5210',
+      engineer: '9660',
+      technician: '1540'
+    };
+
+    // Show or hide the validation code input based on the selected role
+    roleSelect.addEventListener('change', () => {
+      const selectedRole = roleSelect.value;
+      if (roleCodes[selectedRole]) {
+        validationCodeGroup.classList.remove('hidden');
+      } else {
+        validationCodeGroup.classList.add('hidden');
+        validationCodeInput.value = '';
+        validationCodeError.textContent = '';
+      }
+    });
+
+    // Validate the role-specific code on form submission
+    registerForm.addEventListener('submit', (e) => {
+      const selectedRole = roleSelect.value;
+      const validationCode = validationCodeInput.value.trim();
+      if (roleCodes[selectedRole]) {
+        if (validationCode !== roleCodes[selectedRole]) {
+          e.preventDefault();
+          validationCodeError.textContent = 'Please enter the correct validation code.';
+        } else {
+          validationCodeError.textContent = '';
+        }
+      }
+    });
+  </script>
+</body>
+</html>

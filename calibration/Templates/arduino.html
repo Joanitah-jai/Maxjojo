@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arduino Serial Data</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    /* Header */
+    .header {
+      background-color: #007700;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      background-color: rgb(2, 31, 2);
+      padding: 10px;
+      justify-content: space-around;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+
+    .navbar a:hover {
+      background-color: #575757;
+      border-radius: 5px;
+    }
+
+    /* Container */
+    .container {
+      width: 80%;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #007700;
+    }
+
+    .message {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #721c24;
+      background-color: #f8d7da;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .data p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    .refresh {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      background-color: rgb(2, 31, 2);
+      color: white;
+      text-align: center;
+      font-size: 18px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .refresh:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    Arduino Serial Data
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <a href="{% url 'calibration:home' %}">Home</a>
+    <a href="{% url 'calibration:arduino' %}">Arduino</a>
+    <a href="{% url 'calibration:medicalequipment_list' %}">Equipment List</a>
+  </div>
+
+  <!-- Data Display -->
+  <div class="container">
+    <h1>Live Data Feed</h1>
+    <p class="message">{{ message }}</p>
+    <div class="data">
+      {% for line in data_lines %}
+        <p>{{ line }}</p>
+      {% endfor %}
+    </div>
+    <a href="{% url 'calibration:arduino' %}" class="refresh">Refresh Data</a>
+  </div>
+
+</body>
+</html>

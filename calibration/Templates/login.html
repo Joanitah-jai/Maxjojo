@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url("{% static 'p2.jpeg' %}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .header-bar {
+            width: 100%;
+            background: darkgreen;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .navbar {
+            width: 100%;
+            background: white;
+            padding: 15px 0;
+            text-align: center;
+            position: fixed;
+            top: 50px;
+            left: 0;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            padding: 14px 20px;
+            font-size: 18px;
+        }
+        .navbar a:hover {
+            background-color: lightgray;
+            border-radius: 5px;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            margin-top: 120px;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            background-color: #ff69b4;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .login-container button:hover {
+            background-color: #ff1493;
+        }
+        .cms-info {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .signup-link {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .signup-link a {
+            color: #ff69b4;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">Calibration Management System</div>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+    <div class="login-container">
+        <h2>Login</h2>
+         <!-- Display error message if form errors are present -->
+        {% if form.errors %}
+        <div class="error-message">
+            <p>Please enter a correct username and password. Note that both fields may be case-sensitive.</p>
+        </div>
+        {% endif %}
+     
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+    </div>
+    <div class="cms-info">
+        <h3>About the Calibration Management System (CMS)</h3>
+        <p>The CMS is designed to streamline the calibration of hospital equipment, ensuring timely maintenance, accuracy, and compliance. Features include device management, automated alerts, task scheduling, and real-time monitoring.</p>
+        <a href="{% url 'calibration:register' %}">Register if You don't have an account</a>
+    </div>
+</body>
+</html>
