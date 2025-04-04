@@ -74,7 +74,7 @@ def login_view(request):
             return redirect("calibration:home")
     else:
         form = CustomAuthenticationForm()
-    return render(request, 'calibration/login.html', {"form": form})
+    return render(request, 'login.html', {"form": form})
 
 @method_decorator(login_required, name='dispatch')
 class UserListView(View):
