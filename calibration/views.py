@@ -65,15 +65,16 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {"form": form })
-from django.template.loader import get_template
-
 
 def login_view(request): 
-    try:
-        get_template("login.html")  # or "login/login.html" if needed
-        return HttpResponse("Template found successfully ✅")
-    except Exception as e:
-        return HttpResponse(f"Template error: {e}")
+    if request.method == "POST":
+        form = CustomAuthenticationForm(data=request.POST)
+        if form.is_valid():
+            login(request, form.get_user()) 
+            return redirect("calibration:home")
+    else:
+        form = CustomAuthenticationForm()
+    return render(request, 'login.html', {"form": form})
 
 @method_decorator(login_required, name='dispatch')
 class UserListView(View):
